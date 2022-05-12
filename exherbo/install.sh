@@ -1,6 +1,5 @@
-#!/usr/bin/env bash -e
-
-net-setup
+#!/usr/bin/env bash
+set -e
 
 while :; do
     lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
@@ -14,7 +13,7 @@ if [[ $my_disk == *"nvme"* ]]; then
 else
     part1="$my_disk"1
     part2="$my_disk"2
-f
+if
 
 # Partition
 printf "label: gpt\n,550M,U\n,,L\n" | sfdisk $my_disk
@@ -46,4 +45,4 @@ mount -o rbind /sys /mnt/exherbo/sys/
 mount -t proc none /mnt/exherbo/proc/
 mount $part1 /mnt/exherbo/boot/
 cp /etc/resolv.conf /mnt/exherbo/etc/resolv.conf
-env -i TERM=$TERM SHELL=/bin/bash HOME=$HOME $(which chroot) /mnt/exherbo /bin/bash -c 'source /etc/profile; ./iamchroot.sh; rm iamchroot.sh'
+env -i TERM=$TERM SHELL=/bin/bash HOME=$HOME $(which chroot) /mnt/exherbo /bin/bash -c 'source /etc/profile; ./iamchroot.sh; rm iamchroot.sh;'

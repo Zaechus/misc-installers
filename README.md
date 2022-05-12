@@ -2,13 +2,18 @@
 
 Various scripts to install operating systems.
 
+```
+curl -OL https://github.com/Zaechus/misc-installers/archive/main.tar.gz
+tar xzf main.tar.gz
+```
+
 ## Installers
 
 - Alpine: already has the amazing `setup-alpine` command. Use the `ROOTFS` envvar to use a filesystem other than ext4.
 - Arch: An example can be found [here](https://github.com/Zaechus/arch-install-script), or just use the new archinstall.
 - [Artix](https://github.com/Zaechus/artix-installer)
-- Exherbo
+- [Exherbo](https://github.com/Zaechus/misc-installers/tree/main/exherbo)
 - [Funtoo](https://www.funtoo.org/Wolf_Pack_Philosophy)
-- Gentoo
+- [Gentoo](https://github.com/Zaechus/misc-installers/tree/main/gentoo)
 - [NixOS](https://github.com/Zaechus/nixos-config)
 - Void: aleady uses a TUI installer, but it is limited in some regards.
