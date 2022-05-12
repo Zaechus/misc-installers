@@ -13,7 +13,7 @@ if [[ $my_disk == *"nvme"* ]]; then
 else
     part1="$my_disk"1
     part2="$my_disk"2
-if
+fi
 
 # Partition
 printf "label: gpt\n,550M,U\n,,L\n" | sfdisk $my_disk
