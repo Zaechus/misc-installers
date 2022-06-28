@@ -1,24 +1,30 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/sh -e
 
 my_hostname=zebra
+kver="5.18.7"
+
+# Configure package manager
+sed "s/jobs=.*/jobs=$(($(nproc)+1))/" /etc/paludis/options.conf
 
 cave sync
 
 # Install kernel
 cd /usr/src
-curl -OL https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.17.7.tar.xz
+curl -OL https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz
+tar xJf linux*
+cd linux*
 make nconfig
-make -j$(nproc)
+make -j$(($(nproc)+1))
 make modules_install
-cp arch/x86/boot/bzImage /boot/kernel
+cp arch/x86_64/boot/bzImage /boot/kernel
 
 # init
+# TODO
 cave resolve --execute --preserve-world --skip-phase test sys-apps/systemd
 
 # Boot loader
 bootctl install
-kernel-install add 5.17.7 /boot/vmlinuz-5.17.7
+kernel-install add $kver /boot/vmlinuz-$kver
 
 # Finalize
 echo $my_hostname > /etc/hostname

@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-set -e
+#!/bin/sh -e
 
 while :; do
     lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
@@ -25,7 +24,6 @@ mkfs.ext4 $part2
 # Mount root
 mkdir /mnt/exherbo
 mount $part2 /mnt/exherbo
-
 cp iamchroot.sh /mnt/exherbo
 cd /mnt/exherbo
 
@@ -45,4 +43,6 @@ mount -o rbind /sys /mnt/exherbo/sys/
 mount -t proc none /mnt/exherbo/proc/
 mount $part1 /mnt/exherbo/boot/
 cp /etc/resolv.conf /mnt/exherbo/etc/resolv.conf
-env -i TERM=$TERM SHELL=/bin/bash HOME=$HOME $(which chroot) /mnt/exherbo /bin/bash -c 'source /etc/profile; ./iamchroot.sh; rm iamchroot.sh;'
+env -i TERM=$TERM SHELL=/bin/bash HOME=$HOME \
+    $(which chroot) /mnt/exherbo /bin/bash -c \
+    'source /etc/profile; ./iamchroot.sh; rm iamchroot.sh;'
