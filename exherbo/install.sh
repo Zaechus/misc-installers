@@ -35,14 +35,16 @@ sha256sum -c exherbo-x86_64-pc-linux-gnu-current.tar.xz.sha256sum
 tar xJpf exherbo*xz
 
 # fstab
-printf '' > /mnt/exherbo/etc/fstab
+uuid1=$(blkid $part1 -o value -s UUID)
+uuid2=$(blkid $part2 -o value -s UUID)
+printf "UUID=$uuid2\t/\text4\tdefaults\t0 0\nUUID=$uuid1\t/boot\tvfat\tdefault\t0 2\n" > /mnt/exherbo/etc/fstab
 
 # Chroot
 mount -o rbind /dev /mnt/exherbo/dev/
 mount -o rbind /sys /mnt/exherbo/sys/
 mount -t proc none /mnt/exherbo/proc/
 mount $part1 /mnt/exherbo/boot/
-cp /etc/resolv.conf /mnt/exherbo/etc/resolv.conf
+cp /etc/resolv.conf /mnt/exherbo/etc/
 env -i TERM=$TERM SHELL=/bin/bash HOME=$HOME \
     $(which chroot) /mnt/exherbo /bin/bash -c \
     'source /etc/profile; ./iamchroot.sh; rm iamchroot.sh;'
