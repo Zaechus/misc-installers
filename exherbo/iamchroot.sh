@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 my_hostname=zebra
-kver="5.18.7"
+kver="5.18.11"
 
 # Configure package manager
 sed "s/jobs=.*/jobs=$(($(nproc)+1))/" /etc/paludis/options.conf
@@ -13,14 +13,17 @@ cd /usr/src
 curl -OL https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$kver.tar.xz
 tar xJf linux*
 cd linux*
-make nconfig
+make MENUCONFIG_COLOR=blackbg menuconfig
 make -j$(($(nproc)+1))
 make modules_install
 cp arch/x86_64/boot/bzImage /boot/kernel
 
 # init
-# TODO
+echo */* systemd >> /etc/paludis/options.conf
+cave resolve -x sys-apps/systemd
+cave resolve world -cx
 cave resolve --execute --preserve-world --skip-phase test sys-apps/systemd
+eclectic init set systemd
 
 # Boot loader
 bootctl install

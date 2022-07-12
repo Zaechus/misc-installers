@@ -1,6 +1,6 @@
 # misc-installers
 
-Various scripts to install operating systems.
+Various scripts to install manual Linux distros.
 
 ```
 curl -OL https://github.com/Zaechus/misc-installers/archive/main.tar.gz
