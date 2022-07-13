@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+net-setup
+
 while :; do
     lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
     printf '\nDisk (e.g. /dev/sda): ' && read my_disk
@@ -37,7 +39,7 @@ tar xJpf exherbo*xz
 # fstab
 uuid1=$(blkid $part1 -o value -s UUID)
 uuid2=$(blkid $part2 -o value -s UUID)
-printf "UUID=$uuid2\t/\text4\tdefaults\t0 0\nUUID=$uuid1\t/boot\tvfat\tdefault\t0 2\n" > /mnt/exherbo/etc/fstab
+printf "/dev/disk/by-uuid/$uuid2\t/\text4\tdefaults\t0 1\n/dev/disk/by-uuid/$uuid1\t/boot\tvfat\tdefault\t0 2\n" > /mnt/exherbo/etc/fstab
 
 # Chroot
 mount -o rbind /dev /mnt/exherbo/dev/

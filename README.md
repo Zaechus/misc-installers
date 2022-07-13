@@ -15,5 +15,6 @@ tar xzf main.tar.gz
 - [Exherbo](https://github.com/Zaechus/misc-installers/tree/main/exherbo)
 - [Funtoo](https://www.funtoo.org/Wolf_Pack_Philosophy)
 - [Gentoo](https://github.com/Zaechus/misc-installers/tree/main/gentoo)
+- Manjaro: `manjaro-architect` is unmaintained
 - [NixOS](https://github.com/Zaechus/nixos-config)
 - Void: aleady uses a TUI installer, but it is limited in some regards.

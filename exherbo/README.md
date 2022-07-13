@@ -2,6 +2,8 @@
 
 [Exherbo live system recommendation](http://www.sysresccd.org/)
 
+Connect to the internet
+
 ```
 ./install.sh
 ```
