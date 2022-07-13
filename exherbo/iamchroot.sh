@@ -37,6 +37,7 @@ printf "127.0.0.1\t$my_hostname\tlocalhost\n::1\tlocalhost\n" > /etc/hosts
 echo LANG="en_US.UTF-8" > /etc/env.d/99locale
 ln -s /usr/share/zoneinfo/America/Denver /etc/localtime
 
+systemctl enable getty@tty1
 systemctl enable systemd-resolved
 systemctl enable systemd-networkd
 
