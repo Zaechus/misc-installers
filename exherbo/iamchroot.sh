@@ -4,7 +4,7 @@ my_hostname=zebra
 kver="5.18.11"
 
 # Configure package manager
-sed "s/jobs=.*/jobs=$(nproc)/" /etc/paludis/options.conf
+sed -i "s/jobs=.*/jobs=$(nproc)/" /etc/paludis/options.conf
 
 cave sync
 
@@ -28,6 +28,7 @@ eclectic init set systemd
 # Boot loader
 bootctl install
 kernel-install add $kver /boot/vmlinuz-$kver
+sed -i "s~^options.*~options    root=/dev/disk/by-uuid/$(blkid $part2 -o value -s UUID)~" /boot/loader/entries/*-$kver.conf
 
 # Finalize
 echo $my_hostname > /etc/hostname
@@ -35,5 +36,8 @@ printf "127.0.0.1\t$my_hostname\tlocalhost\n::1\tlocalhost\n" > /etc/hosts
 
 echo LANG="en_US.UTF-8" > /etc/env.d/99locale
 ln -s /usr/share/zoneinfo/America/Denver /etc/localtime
+
+systemctl enable systemd-resolved
+systemctl enable systemd-networkd
 
 passwd

@@ -1,7 +1,5 @@
 #!/bin/sh -e
 
-net-setup
-
 while :; do
     lsblk -o NAME,SIZE,TYPE,MOUNTPOINTS
     printf '\nDisk (e.g. /dev/sda): ' && read my_disk
