@@ -48,7 +48,8 @@ or alternatively: [Ventoy](https://github.com/ventoy/Ventoy).
 
 Keyboard Shortcut | Screen Action
 -|-
-C-a | Split
+C-a S | Horizontal split
+C-a \| | Vertical split
 C-a TAB | Switch focus
 C-a c | Open new terminal in new window
 C-a " | Show available processes
@@ -57,6 +58,8 @@ C-a :password | Set password for session
 C-a C-x | Lock screen
 C-a C-d | Detach to background
 C-a \ | Kill all windows, terminate screen
+C-a C-[ | Enter copy mode. Use SPACE to begin and end selection.
+C-a C-] | Write the paste buffer to stdin
 
 ### Links
 `links gentoo.org`
